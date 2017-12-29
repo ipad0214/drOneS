@@ -29,11 +29,12 @@ class _GyroModel:
 
 
 class MessageThread:
-    def __init__(self, q, websocket_queue, arduino_queue):
+    def __init__(self, q, websocket_queue, arduino_queue, hardware_queue):
         self.message_model = MessageModel()
         self.q = q
         self.websocket_queue = websocket_queue
         self.arduino_queue = arduino_queue
+        self.hardware_queue = hardware_queue
 
         while True:
             self.update_model_from_json()
@@ -69,6 +70,8 @@ class MessageThread:
             self.message_model.Gyroscope.Pitch = value_object["Gyroscope"]["Pitch"]
             self.message_model.Gyroscope.Roll = value_object["Gyroscope"]["Roll"]
             self.message_model.Gyroscope.Yaw = value_object["Gyroscope"]["Yaw"]
+
+            self.hardware_queue.put(self.message_model.Hardware)
         else:
             return
 
