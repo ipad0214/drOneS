@@ -5,7 +5,7 @@ import message_model
 def setup_GPIO():
     board.setwarnings(False)
     board.setmode(board.BOARD)
-    board.setup(11, board.OUT)
+    board.setup(12, board.OUT)
 
 def set_LED_status(status):
     if status:
