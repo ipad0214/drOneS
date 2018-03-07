@@ -5,15 +5,15 @@ class MessageModel:
         self.November = _EngineModel()
         self.Echo = _EngineModel()
         self.Sierra = _EngineModel()
-        self.Whiskey = _EngineModel()
+        self.Whisky = _EngineModel()
         self.Hardware = _HardwareModel()
         self.Gyroscope = _GyroModel()
 
 
 class _EngineModel:
     def __init__(self):
-        self.EngineValue = 0
-        self.EngineStatus = 0
+        self.Value = 0
+        self.Status = 0
 
 
 class _HardwareModel:
@@ -56,22 +56,20 @@ class MessageThread:
         if not self.q.empty():
             value_object = json.loads(self.q.get(block=False))
             # engines
-            self.message_model.Echo.EngineValue = value_object["Echo"]["EngineValue"]
-            self.message_model.Echo.EngineStatus = value_object["Echo"]["EngineStatus"]
-            self.message_model.November.EngineValue = value_object["November"]["EngineValue"]
-            self.message_model.November.EngineStatus = value_object["November"]["EngineStatus"]
-            self.message_model.Sierra.EngineValue = value_object["Sierra"]["EngineValue"]
-            self.message_model.Sierra.EngineStatus = value_object["Sierra"]["EngineStatus"]
-            self.message_model.Whiskey.EngineValue = value_object["Whiskey"]["EngineValue"]
-            self.message_model.Whiskey.EngineStatus = value_object["Whiskey"]["EngineStatus"]
+            self.message_model.Echo.Value = value_object["Echo"]["Value"]
+            self.message_model.Echo.Status = value_object["Echo"]["Status"]
+            self.message_model.November.Value = value_object["November"]["Value"]
+            self.message_model.November.Status = value_object["November"]["Status"]
+            self.message_model.Sierra.Value = value_object["Sierra"]["Value"]
+            self.message_model.Sierra.Status = value_object["Sierra"]["Status"]
+            self.message_model.Whisky.Value = value_object["Whisky"]["Value"]
+            self.message_model.Whisky.Status = value_object["Whisky"]["Status"]
             # hardware
-            self.message_model.Hardware.LED = value_object["Hardware"]["Led"]
+            #self.message_model.Hardware.LED = value_object["Hardware"]["Led"]
             # gyro
             self.message_model.Gyroscope.Pitch = value_object["Gyroscope"]["Pitch"]
             self.message_model.Gyroscope.Roll = value_object["Gyroscope"]["Roll"]
             self.message_model.Gyroscope.Yaw = value_object["Gyroscope"]["Yaw"]
-
-            #self.hardware_queue.put(self.message_model.Hardware)
         else:
             return
 

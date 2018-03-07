@@ -4,16 +4,16 @@ import message_model
 import queue
 import time
 import os
+from random import randint
 if os.uname()[4][:3] == 'arm':
     import hardware_controller
 else:
     print("ERROR: NOT RUNNING ON PI => NO GPIO OUTPUT")
 
-from random import randint
-
 
 def running_on_pi():
     return os.uname()[4][:3] == 'arm'
+
 
 def main():
     q = queue.Queue()
