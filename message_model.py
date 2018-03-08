@@ -1,5 +1,13 @@
 import json
 
+
+class GpioModel:
+    def __init__(self):
+        self.websocket_led = False
+        self.websocket_receive_led = False
+        self.websocket_send_led = False
+
+
 class MessageModel:
     def __init__(self):
         self.November = _EngineModel()
@@ -14,12 +22,6 @@ class _EngineModel:
     def __init__(self):
         self.Value = 0
         self.Status = 0
-
-
-class _HardwareModel:
-    def __init__(self):
-        self.LED = False
-        self.Websocket_LED = False
 
 
 class _GyroModel:
@@ -65,12 +67,13 @@ class MessageThread:
             self.message_model.Sierra.Status = value_object["Sierra"]["Status"]
             self.message_model.Whisky.Value = value_object["Whisky"]["Value"]
             self.message_model.Whisky.Status = value_object["Whisky"]["Status"]
-            # hardware
-            #self.message_model.Hardware.LED = value_object["Hardware"]["Led"]
             # gyro
             self.message_model.Gyroscope.Pitch = value_object["Gyroscope"]["Pitch"]
             self.message_model.Gyroscope.Roll = value_object["Gyroscope"]["Roll"]
             self.message_model.Gyroscope.Yaw = value_object["Gyroscope"]["Yaw"]
+
+            if self.arduino_queue is not None:
+                self.arduino_queue.put(self.message_model)
         else:
             return
 

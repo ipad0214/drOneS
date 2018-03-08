@@ -1,5 +1,6 @@
 import tornado.web
 import tornado.websocket
+import message_model
 import tornado.ioloop
 import threading
 
@@ -13,6 +14,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         pass
 
     def initialize(self, queue, cons, hardware_queue):
+        self.hardware_model = message_model.GpioModel()
         self.queue = queue
         self.connections = cons
         self.hardware_queue = hardware_queue
@@ -31,7 +33,6 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     # the client sent the message
     def on_message(self, message):
         self.queue.put(message)
-
 
     # client disconnected
     def on_close(self):

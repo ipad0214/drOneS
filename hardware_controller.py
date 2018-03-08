@@ -4,8 +4,6 @@ import os
 
 if os.uname()[4][:3] == 'arm':
     import RPi.GPIO as board
-else:
-    print("ERROR: NOT RUNNING ON PI => NO GPIO OUTPUT")
 
 websocket_status_pin = 11
 websocket_receiving_pin = 10
@@ -34,13 +32,25 @@ class HardwareController:
 
         while True:
             if not hardware_queue.empty():
-                self.hardware_model.LED = hardware_queue.get(block=False).LED
+                queue_resp = hardware_queue.get(block=False)
 
-                self.set_websocket_status_led(self.hardware_model.Websocket_LED)
+                if queue_resp is message_model.GpioModel:
+                    self.set_websocket_status_led(queue_resp.websocket_led)
+                    self.set_websocket_sending_led(queue_resp.websocket_receive_led)
+                    self.set_websocket_receiving_led(queue_resp.websocket_sending_led)
+
 
     @staticmethod
     def set_websocket_status_led(value):
         set_led(websocket_status_pin, value)
+
+    @staticmethod
+    def set_websocket_receiving_led(value):
+        set_led(websocket_receiving_pin, value)
+
+    @staticmethod
+    def set_websocket_sending_led(value):
+        set_led(websocket_sending_pin, value)
 
 
 def run(hardware_queue, message_queue):
