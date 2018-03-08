@@ -24,10 +24,10 @@ def main():
         hardware_thread = threading.Thread(target=hardware_controller.run, args=(hardware_queue, q, ))
         message_thread = threading.Thread(target=message_model.MessageThread,
                                           args=(q, websocket_queue, arduino_queue, hardware_queue))
+        web_thread = threading.Thread(target=websocket.run, args=(q, websocket_queue, hardware_queue))
     else:
-        message_thread = threading.Thread(target=message_model.MessageThread, args=(q, websocket_queue, arduino_queue ))
-
-    web_thread = threading.Thread(target=websocket.run, args=(q, websocket_queue,))
+        message_thread = threading.Thread(target=message_model.MessageThread, args=(q, websocket_queue, arduino_queue))
+        web_thread = threading.Thread(target=websocket.run, args=(q, websocket_queue))
 
     web_thread.start()
     if running_on_pi():

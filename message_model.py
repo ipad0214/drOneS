@@ -19,6 +19,7 @@ class _EngineModel:
 class _HardwareModel:
     def __init__(self):
         self.LED = False
+        self.Websocket_LED = False
 
 
 class _GyroModel:
