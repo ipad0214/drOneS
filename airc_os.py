@@ -5,6 +5,7 @@ import queue
 import time
 import os
 import hardware_controller
+import console_controller
 
 version = "0.1.1"
 cpu_architecture = os.uname()[4][:3]
@@ -15,7 +16,7 @@ gpio_model = message_model.GpioModel()
 def create_welcome_screen():
     print("###################")
     print("#                 #")
-    print("#       LUNA      #")
+    print("#       {}      #".format(console_controller.create_header("LUNA")))
     print("#     v. {}    #".format(version))
     print("#                 #")
     print("###################")
@@ -39,12 +40,26 @@ def main():
     web_thread = threading.Thread(target=websocket.run, args=(q, websocket_queue, hardware_queue, gpio_model))
     hardware_thread = threading.Thread(target=hardware_controller.run, args=(hardware_queue, q,))
 
-    web_thread.start()
-    print("websocket_thread: ok")
-    hardware_thread.start()
-    print("hardware_thread: ok")
-    message_thread.start()
-    print("message_thread: ok")
+    try:
+        web_thread.start()
+        print("websocket_thread: {}".format(console_controller.ok()))
+    except:
+        print("websocket_thread: {}".format(console_controller.failed()))
+        pass
+
+    try:
+        hardware_thread.start()
+        print("hardware_thread: {}".format(console_controller.ok()))
+    except:
+        print("hardware_thread: {}".format(console_controller.failed()))
+        pass
+
+    try:
+        message_thread.start()
+        print("message_thread: {}".format(console_controller.ok()))
+    except:
+        print("message_thread: {}".format(console_controller.failed()))
+        pass
 
     print("luna os boot complete")
 
