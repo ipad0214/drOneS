@@ -4,8 +4,8 @@ import json
 class GpioModel:
     def __init__(self):
         self.websocket_led = False
-        self.websocket_receive_led = False
-        self.websocket_send_led = False
+        self.websocket_receiving_led = False
+        self.websocket_sending_led = False
 
 
 class MessageModel:
@@ -31,12 +31,11 @@ class _GyroModel:
 
 
 class MessageThread:
-    def __init__(self, q, websocket_queue, arduino_queue, hardware_queue):
+    def __init__(self, q, websocket_queue, arduino_queue):
         self.message_model = MessageModel()
         self.q = q
         self.websocket_queue = websocket_queue
         self.arduino_queue = arduino_queue
-        self.hardware_queue = hardware_queue
 
         while True:
             self.update_model_from_json()
@@ -44,7 +43,7 @@ class MessageThread:
 
     def send_model_as_json(self):
         msg = json.dumps(self.message_model, default=lambda o: o.__dict__,
-                           sort_keys=True, indent=4)
+                         sort_keys=True, indent=4)
         self.websocket_queue.put(msg)
 
     def update_model_from_arduino(self):
@@ -71,11 +70,11 @@ class MessageThread:
             self.message_model.Gyroscope.Roll = value_object["Gyroscope"]["Roll"]
             self.message_model.Gyroscope.Yaw = value_object["Gyroscope"]["Yaw"]
 
-            if self.arduino_queue is not None:
-                self.arduino_queue.put(self.message_model)
+            # if self.arduino_queue is not None:
+            # self.arduino_queue.put(self.message_model)
         else:
             return
 
 
-def run(q, websocket_queue, arduino_queue, hardware_queue):
-    controller = MessageThread(q=q, websocket_queue=websocket_queue, arduino_queue=arduino_queue, hardware_queue=hardware_queue)
+def run(q, websocket_queue, arduino_queue):
+    controller = MessageThread(q=q, websocket_queue=websocket_queue, arduino_queue=arduino_queue)
