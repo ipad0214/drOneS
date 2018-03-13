@@ -4,10 +4,11 @@ import message_model
 import queue
 import time
 import os
+import hardware_controller
 from random import randint
-if os.uname()[4][:3] == 'arm':
-    import hardware_controller
-else:
+
+
+if not os.uname()[4][:3] == 'arm':
     print("ERROR: NOT RUNNING ON PI => NO GPIO OUTPUT")
 
 
@@ -19,19 +20,14 @@ def main():
     q = queue.Queue()
     websocket_queue = queue.Queue()
     arduino_queue = queue.Queue()
-    if running_on_pi():
-        hardware_queue = queue.Queue()
-        hardware_thread = threading.Thread(target=hardware_controller.run, args=(hardware_queue, q, ))
-        message_thread = threading.Thread(target=message_model.MessageThread,
-                                          args=(q, websocket_queue, arduino_queue, hardware_queue))
-        web_thread = threading.Thread(target=websocket.run, args=(q, websocket_queue, hardware_queue))
-    else:
-        message_thread = threading.Thread(target=message_model.MessageThread, args=(q, websocket_queue, arduino_queue))
-        web_thread = threading.Thread(target=websocket.run, args=(q, websocket_queue))
+    hardware_queue = queue.Queue()
+
+    message_thread = threading.Thread(target=message_model.run, args=(q, websocket_queue, arduino_queue, hardware_queue))
+    web_thread = threading.Thread(target=websocket.run, args=(q, websocket_queue, hardware_queue))
+    hardware_thread = threading.Thread(target=hardware_controller.run, args=(hardware_queue, q,))
 
     web_thread.start()
-    if running_on_pi():
-        hardware_thread.start()
+    hardware_thread.start()
     message_thread.start()
 
     while True:

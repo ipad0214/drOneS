@@ -47,7 +47,7 @@ def send(queue):
                 ws.write_message(queue.get())
 
 
-def run(queue, websocket_queue, hardware_queue = None):
+def run(queue, websocket_queue, hardware_queue=None):
     send_thread = threading.Thread(target=send, args=(websocket_queue, ))
     send_thread.start()
     application = tornado.web.Application([

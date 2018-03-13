@@ -14,7 +14,6 @@ class MessageModel:
         self.Echo = _EngineModel()
         self.Sierra = _EngineModel()
         self.Whisky = _EngineModel()
-        self.Hardware = _HardwareModel()
         self.Gyroscope = _GyroModel()
 
 
@@ -32,12 +31,12 @@ class _GyroModel:
 
 
 class MessageThread:
-    def __init__(self, q, websocket_queue, arduino_queue):
+    def __init__(self, q, websocket_queue, arduino_queue, hardware_queue):
         self.message_model = MessageModel()
         self.q = q
         self.websocket_queue = websocket_queue
         self.arduino_queue = arduino_queue
-        #self.hardware_queue = hardware_queue
+        self.hardware_queue = hardware_queue
 
         while True:
             self.update_model_from_json()
@@ -77,4 +76,6 @@ class MessageThread:
         else:
             return
 
-        print(self.message_model.Hardware.LED)
+
+def run(q, websocket_queue, arduino_queue, hardware_queue):
+    controller = MessageThread(q=q, websocket_queue=websocket_queue, arduino_queue=arduino_queue, hardware_queue=hardware_queue)
