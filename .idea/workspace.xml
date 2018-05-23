@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8d2607b-e3ca-4a5a-bac3-dee1b80fd514" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/threadding_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/threadding_test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hardware_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/hardware_controller.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,7 +34,7 @@
       <file leaf-file-name="airc_os.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/airc_os.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="187">
               <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
@@ -46,20 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="console_controller.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/console_controller.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="hardware_controller.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hardware_controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="52" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
+            <state relative-caret-position="493">
+              <caret line="38" column="45" selection-start-line="38" selection-start-column="45" selection-end-line="38" selection-end-column="45" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -101,10 +89,10 @@
         <option value="$PROJECT_DIR$/rpi.py" />
         <option value="$PROJECT_DIR$/arduino_bridge.py" />
         <option value="$PROJECT_DIR$/message_model.py" />
-        <option value="$PROJECT_DIR$/hardware_controller.py" />
         <option value="$PROJECT_DIR$/websocket.py" />
         <option value="$PROJECT_DIR$/console_controller.py" />
         <option value="$PROJECT_DIR$/airc_os.py" />
+        <option value="$PROJECT_DIR$/hardware_controller.py" />
       </list>
     </option>
   </component>
@@ -209,13 +197,13 @@
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49791667" weight="0.3270853" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49375" weight="0.3298969" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20885417" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20885417" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49375" weight="0.39906102" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49375" weight="0.39831302" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -697,9 +685,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/console_controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/airc_os.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="187">
           <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
@@ -707,17 +702,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/console_controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hardware_controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="52" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
+        <state relative-caret-position="493">
+          <caret line="38" column="45" selection-start-line="38" selection-start-column="45" selection-end-line="38" selection-end-column="45" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>

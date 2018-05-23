@@ -31,10 +31,12 @@ def set_led(pin, permanent=False):
         return
 
     board.output(pin, board.HIGH)
+    print("pin: {}, status: ON".format(pin))
     if permanent:
         return
     time.sleep(.50)
     board.output(pin, board.LOW)
+    print("pin: {}, status: OFF".format(pin))
 
 
 def set_led_off(pin):
