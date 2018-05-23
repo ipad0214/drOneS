@@ -1,6 +1,7 @@
 import message_model
 import os
 import time
+import console_controller
 
 if os.uname()[4][:3] == 'arm':
     import RPi.GPIO as board
@@ -23,11 +24,11 @@ def setup_gpio(isOnPi):
 
 def set_led(pin, permanent=False):
     if not os.uname()[4][:3] == "arm":
-        print("pin: {}, status: ON".format(pin))
+        print("pin: {0}, status: {1}".format(pin, console_controller.create_green_word("ON")))
         if permanent:
             return
         time.sleep(.50)
-        print("pin: {}, status: OFF".format(pin))
+        print("pin: {0}, status: {1}".format(pin, console_controller.create_red_word("OFF")))
         return
 
     board.output(pin, board.HIGH)

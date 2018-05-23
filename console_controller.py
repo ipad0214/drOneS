@@ -11,6 +11,9 @@ UNDERLINE = '\033[4m'
 def create_green_word(text):
     return OKGREEN + text + ENDC
 
+def create_red_word(text):
+    return FAIL + text + ENDC
+
 
 def create_header(header):
     return HEADER + header + ENDC
