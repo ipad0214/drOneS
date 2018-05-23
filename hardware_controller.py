@@ -21,23 +21,28 @@ def setup_gpio(isOnPi):
         board.setup(websocket_receiving_pin, board.OUT)
         board.setup(websocket_sending_pin, board.OUT)
 
+def create_output_on(pin):
+    print("pin: {0}, status: {1}".format(pin, console_controller.create_green_word("ON")))
+
+def create_output_off(pin):
+    print("pin: {0}, status: {1}".format(pin, console_controller.create_red_word("OFF")))
 
 def set_led(pin, permanent=False):
     if not os.uname()[4][:3] == "arm":
-        print("pin: {0}, status: {1}".format(pin, console_controller.create_green_word("ON")))
+        create_output_on(pin)
         if permanent:
             return
         time.sleep(.50)
-        print("pin: {0}, status: {1}".format(pin, console_controller.create_red_word("OFF")))
+        create_output_off(pin)
         return
 
     board.output(pin, board.HIGH)
-    print("pin: {}, status: ON".format(pin))
+    create_output_on(pin)
     if permanent:
         return
     time.sleep(.50)
     board.output(pin, board.LOW)
-    print("pin: {}, status: OFF".format(pin))
+    create_output_off(pin)
 
 
 def set_led_off(pin):
