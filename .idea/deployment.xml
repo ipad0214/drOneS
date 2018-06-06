@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="pi@192.168.56.3:22" showEqualInSync="true" showDifferentInSync="false" showNewOnTargetInSync="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="pi@pi_vm" showEqualInSync="true" showDifferentInSync="false" showNewOnSourceInSync="false" showNewOnTargetInSync="false">
     <serverData>
       <paths name="pi">
         <serverdata>
@@ -9,7 +9,7 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="pi@192.168.56.3:22">
+      <paths name="pi@pi_vm">
         <serverdata>
           <mappings>
             <mapping deploy="/home/pi/airc" local="$PROJECT_DIR$" />

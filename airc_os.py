@@ -2,10 +2,15 @@ import threading
 import websocket
 import message_model
 import queue
+import pip
 import time
 import os
 import hardware_controller
 import console_controller
+
+
+def install_dependencies():
+    pip.main("install", )
 
 version = "0.1.1"
 cpu_architecture = os.uname()[4][:3]
@@ -26,6 +31,8 @@ def create_welcome_screen():
         print(">>> no arm architecture, board outputs will be printed.")
     print("operating system: {}".format(operating_system))
     print("booting LUNA")
+
+    logging = Logging()
 
 
 def main():
