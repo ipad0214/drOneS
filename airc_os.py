@@ -7,6 +7,7 @@ import time
 import os
 import hardware_controller
 import console_controller
+import arduino_bridge
 
 
 def install_dependencies():
@@ -32,8 +33,6 @@ def create_welcome_screen():
     print("operating system: {}".format(operating_system))
     print("booting LUNA")
 
-    logging = Logging()
-
 
 def main():
     create_welcome_screen()
@@ -45,7 +44,8 @@ def main():
 
     message_thread = threading.Thread(target=message_model.run, args=(q, websocket_queue, arduino_queue))
     web_thread = threading.Thread(target=websocket.run, args=(q, websocket_queue, hardware_queue, gpio_model))
-    hardware_thread = threading.Thread(target=hardware_controller.run, args=(hardware_queue, q,))
+    hardware_thread = threading.Thread(target=hardware_controller.run, args=(hardware_queue, q))
+    arduino_thread = threading.Thread(target=arduino_bridge.run, args=(hardware_queue, q, arduino_queue))
 
     try:
         web_thread.start()
@@ -66,6 +66,13 @@ def main():
         print("message_thread: {}".format(console_controller.ok()))
     except:
         print("message_thread: {}".format(console_controller.failed()))
+        pass
+    
+    try: 
+        arduino_thread.start()
+        print("arduino_thread: {}".format(console_controller.ok()))
+    except:
+        print("arduino_thread: {}".format(console_controller.failed()))
         pass
 
     print("luna os boot complete")

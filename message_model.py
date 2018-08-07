@@ -57,23 +57,35 @@ class MessageThread:
         if not self.q.empty():
             value_object = json.loads(self.q.get(block=False))
             # engines
-            self.message_model.Echo.Value = value_object["Echo"]["Value"]
-            self.message_model.Echo.Status = value_object["Echo"]["Status"]
-            self.message_model.November.Value = value_object["November"]["Value"]
-            self.message_model.November.Status = value_object["November"]["Status"]
-            self.message_model.Sierra.Value = value_object["Sierra"]["Value"]
-            self.message_model.Sierra.Status = value_object["Sierra"]["Status"]
-            self.message_model.Whisky.Value = value_object["Whisky"]["Value"]
-            self.message_model.Whisky.Status = value_object["Whisky"]["Status"]
+            self.update_if_newer("Echo", "Value", value_object["Echo"]["Value"])
+            self.update_if_newer("Echo", "Status", value_object["Echo"]["Status"])
+            
+            self.update_if_newer("November", "Value", value_object["November"]["Value"])
+            self.update_if_newer("November", "Status", value_object["November"]["Status"])
+            
+            self.update_if_newer("Sierra", "Value", value_object["Sierra"]["Value"])
+            self.update_if_newer("Sierra", "Status", value_object["Sierra"]["Status"])
+            
+            self.update_if_newer("Whisky", "Value", value_object["Whisky"]["Value"])
+            self.update_if_newer("Whisky", "Status", value_object["Whisky"]["Status"])
+            
             # gyro
             self.message_model.Gyroscope.Pitch = value_object["Gyroscope"]["Pitch"]
             self.message_model.Gyroscope.Roll = value_object["Gyroscope"]["Roll"]
             self.message_model.Gyroscope.Yaw = value_object["Gyroscope"]["Yaw"]
-
-            # if self.arduino_queue is not None:
-            # self.arduino_queue.put(self.message_model)
         else:
             return
+        
+    def update_if_newer(self, name, datapoint, value):
+        current_value = getattr(getattr(self.message_model, name), datapoint)
+        if current_value != value:
+            setattr(getattr(self.message_model, name), datapoint, value)
+            self.arduino_queue.put(self.create_update_message(name, datapoint, value))
+            print("old: {}.{}=>{}".format(name, datapoint, current_value))
+            print("new: {}.{}=>{}".format(name, datapoint, getattr(getattr(self.message_model, name), datapoint)))
+            
+    def create_update_message(self, name, datapoint, value):
+        return "0101{}".format(value)
 
 
 def run(q, websocket_queue, arduino_queue):

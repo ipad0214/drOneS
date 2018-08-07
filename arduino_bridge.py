@@ -9,24 +9,17 @@ if os.uname()[4][:3] == 'arm':
 
 class ArduinoBridgeThread:
     def __init__(self, q, arduino_queue, hardware_queue=None):
-        self.arduino_queue = arduino_queue
-        self.q = q
-        self.serial_port = serial.Serial('/dev/ttyUSB0', baudrate=115200)
-        self.serial_port.timeout = 0
+        if os.uname()[4][:3] == 'arm':
+            self.arduino_queue = arduino_queue
+            self.q = q
+            self.serial_port = serial.Serial('/dev/ttyUSB0', baudrate=115200)
+            self.serial_port.timeout = 0
 
         while True:
             if not arduino_queue.empty():
                 if arduino_queue is not None:
-                    self.send_to_arduino(True)
-
-    def send_to_arduino(self, status):
-        if status:
-            self.serial_port.write(b"SE001001")
-            GPIO.output(11, GPIO.HIGH)
-            sleep(1./120)
-        else:
-            self.serial_port.write(b"SE001000")
-            GPIO.output(11, GPIO.LOW)
-            sleep(1. / 120)
-
-
+                    queue_resp = arduino_queue.get(block=False)
+                    
+                    
+def run(hardware_queue, message_queue, arduino_queue):
+    controller = ArduinoBridgeThread(q=message_queue, arduino_queue=arduino_queue, hardware_queue=hardware_queue)
