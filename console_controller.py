@@ -14,7 +14,6 @@ def create_green_word(text):
 def create_red_word(text):
     return FAIL + text + ENDC
 
-
 def create_header(header):
     return HEADER + header + ENDC
 
@@ -25,4 +24,4 @@ def failed():
     return FAIL + "failed" + ENDC
 
 def create_message_event_info(**kwargs):
-    print("[DATA UPDATE] Datapoint: {} Name: {} Old Value: {} New Value: {}")
+    print(create_header("[DATA UPDATE]") + "Datapoint: {} Name: {} Old Value: {} New Value: {}").format(kwargs)

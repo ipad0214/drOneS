@@ -1,5 +1,6 @@
 import json
 import console_controller
+import arduino_messages
 
 
 class GpioModel:
@@ -86,7 +87,9 @@ class MessageThread:
 
             
     def create_update_message(self, name, datapoint, value):
-        return "0101{}".format(value)
+        if name is "Echo":
+            msg = arduino_messages.set + arduino_messages.engine_echo + arduino_messages.datapoint_value if datapoint is "Value" else arduino_messages.datapoint_status + value
+            return msg
 
 
 def run(q, websocket_queue, arduino_queue):
