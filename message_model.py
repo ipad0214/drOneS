@@ -1,4 +1,5 @@
 import json
+import console_controller
 
 
 class GpioModel:
@@ -70,9 +71,9 @@ class MessageThread:
             self.update_if_newer("Whisky", "Status", value_object["Whisky"]["Status"])
             
             # gyro
-            self.message_model.Gyroscope.Pitch = value_object["Gyroscope"]["Pitch"]
-            self.message_model.Gyroscope.Roll = value_object["Gyroscope"]["Roll"]
-            self.message_model.Gyroscope.Yaw = value_object["Gyroscope"]["Yaw"]
+            self.update_if_newer("Gyroscope", "Pitch", value_object["Gyroscope"]["Pitch"])
+            self.update_if_newer("Gyroscope", "Yaw", value_object["Gyroscope"]["Yaw"])
+            self.update_if_newer("Gyroscope", "Roll", value_object["Gyroscope"]["Roll"])
         else:
             return
         
@@ -81,8 +82,8 @@ class MessageThread:
         if current_value != value:
             setattr(getattr(self.message_model, name), datapoint, value)
             self.arduino_queue.put(self.create_update_message(name, datapoint, value))
-            print("old: {}.{}=>{}".format(name, datapoint, current_value))
-            print("new: {}.{}=>{}".format(name, datapoint, getattr(getattr(self.message_model, name), datapoint)))
+            console_controller.create_message_event_info(datapoint, name, current_value, getattr(getattr(self.message_model, name)))
+
             
     def create_update_message(self, name, datapoint, value):
         return "0101{}".format(value)

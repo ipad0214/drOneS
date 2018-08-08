@@ -18,10 +18,11 @@ def create_red_word(text):
 def create_header(header):
     return HEADER + header + ENDC
 
-
 def ok():
     return OKGREEN + "ok" + ENDC
 
-
 def failed():
     return FAIL + "failed" + ENDC
+
+def create_message_event_info(**kwargs):
+    print("[DATA UPDATE] Datapoint: {} Name: {} Old Value: {} New Value: {}")
