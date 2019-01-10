@@ -10,6 +10,9 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
 
+    PATH = os.path.abspath(os.path.dirname(__file__))
+    PATH = os.path.join(PATH, 'resources', 'test.mp4')
+
     if test_config is None:
         # load the instance config, if it exists, when not testing
         app.config.from_pyfile('config.py', silent=True)
@@ -25,17 +28,23 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/hello')
     def hello():
-        return 'Hello, World!'
+        return 'Hello, World! test123'
         
     @app.route('/stream_data')
     def stream_data():
-        with open('/resources/test.mp4') as f:
-            while True:
-                chunk = ...
-                yield chunk
-                
-        return Response(stream_with_context(generate()), mimetype("video/mp4"))
+        def generate():
+            with open(PATH, "rb") as f:
+                byte = f.read(512)
+                while byte:
+                    yield byte
+                    byte = f.read(512)
+    
+        t = os.stat(PATH)
+        sz = str(t.st_size)
+        return
+    
+    Response(generate(),mimetype='video/mp4',headers={"Content-Type":"video/mp4","Content-Disposition":"inline","Content-Transfer-Enconding":"binary","Content-Length":sz})
 
-    app.run(port=50000, debug=True)
+    app.run(port=50000, debug=True, threaded=True)
 
 create_app()
