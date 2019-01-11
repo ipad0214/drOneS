@@ -8,6 +8,7 @@ import os
 import hardware_controller
 import console_controller
 import arduino_bridge
+import streaming
 
 
 def install_dependencies():
@@ -46,6 +47,7 @@ def main():
     web_thread = threading.Thread(target=websocket.run, args=(q, websocket_queue, hardware_queue, gpio_model))
     hardware_thread = threading.Thread(target=hardware_controller.run, args=(hardware_queue, q))
     arduino_thread = threading.Thread(target=arduino_bridge.run, args=(hardware_queue, q, arduino_queue))
+    video_thread = threading.Thread(target=streaming.run, kwargs=dict(onArm=cpu_architecture != "arm"))
 
     try:
         web_thread.start()
@@ -73,6 +75,13 @@ def main():
         print("arduino_thread: {}".format(console_controller.ok()))
     except:
         print("arduino_thread: {}".format(console_controller.failed()))
+        pass
+
+    try:
+        video_thread.start()
+        print("video_thread: {}".format(console_controller.ok()))
+    except:
+        print("video_thread: {}".format(console_controller.failed()))
         pass
 
     print("luna os boot complete")

@@ -1,3 +1,4 @@
 pyserial==3.0
 tornado==4.5.3
 flask==1.0.2
+opencv==4.0.0.21
