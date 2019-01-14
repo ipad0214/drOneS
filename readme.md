@@ -44,3 +44,6 @@ The hardware thread controls the gpio pins of the pi and gets data about battery
 ## usage
 
 this projects needs to be run when raspbian is bootet completly.
+
+find how to compile opencv here:
+https://www.life2coding.com/install-opencv-3-4-0-python-3-raspberry-pi-3/
