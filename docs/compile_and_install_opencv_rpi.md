@@ -107,10 +107,10 @@ sudo nano /etc/dphys-swapfile
 
 ### find the passage below and change to 1025 and comment out the 100
  
->#set size to absolute value, leaving empty (default) then uses computed value
->#you most likely don't want this, unless you have an special disk situation
->#CONF_SWAPSIZE=100
->CONF_SWAPSIZE=1024
+>#set size to absolute value, leaving empty (default) then uses computed value  
+>#you most likely don't want this, unless you have an special disk situation  
+>#CONF_SWAPSIZE=100  
+>CONF_SWAPSIZE=1024  
 
 ### restart the swap process
 
@@ -138,7 +138,8 @@ sudo ldconfig
 ls -l /usr/local/lib/python3.5/dist-packages/
 ```
 
-Look for a name like cv2.so and if it is not there then look for a name like cv2.cpython-35m-arm-linux-gnueabihf.so (name starting with cv2. and ending with .so). It might happen due to some bugs in Python binding library for Python 3.
+Look for a name like cv2.so and if it is not there then look for a name like cv2.cpython-35m-arm-linux-gnueabihf.so  
+(name starting with cv2. and ending with .so). It might happen due to some bugs in Python binding library for Python 3.
 
 We need to rename cv2.cpython-35m-arm-linux-gnueabihf.so to cv2.so using the following command:
 
@@ -175,10 +176,10 @@ sudo nano /etc/dphys-swapfile
 
 ### find the passage below and change to 1025 and comment out the 100
  
->#set size to absolute value, leaving empty (default) then uses computed value
->#you most likely don't want this, unless you have an special disk situation
-> CONF_SWAPSIZE=100
->#CONF_SWAPSIZE=1024
+>#set size to absolute value, leaving empty (default) then uses computed value  
+>#you most likely don't want this, unless you have an special disk situation  
+> CONF_SWAPSIZE=100  
+>#CONF_SWAPSIZE=1024  
 
 ### restart the swap process
 
