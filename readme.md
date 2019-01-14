@@ -36,6 +36,7 @@ The hardware thread controls the gpio pins of the pi and gets data about battery
 
 1. clone repository *git clone http://gitlab.kuckelsberg.eu/drones/threadding_airc.git
 2. install dependencies *pip3 install -r requirements.txt*
+3. [follow the instructions to install opencv on your RBP](http://www.world-pk.synology.me:30000/drone/threadding_airc/blob/master/docs/compile_and_install_opencv_rpi.md)
 
 ## run 
 

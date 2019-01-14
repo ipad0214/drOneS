@@ -105,11 +105,11 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 sudo nano /etc/dphys-swapfile
 ```
 
-###find the passage below and change to 1025 and comment out the 100
+### find the passage below and change to 1025 and comment out the 100
  
-># set size to absolute value, leaving empty (default) then uses computed value
-># you most likely don't want this, unless you have an special disk situation
-># CONF_SWAPSIZE=100
+>#set size to absolute value, leaving empty (default) then uses computed value
+>#you most likely don't want this, unless you have an special disk situation
+>#CONF_SWAPSIZE=100
 >CONF_SWAPSIZE=1024
 
 ### restart the swap process
@@ -173,12 +173,12 @@ rm opencv.zip opencv_contrib.zip
 sudo nano /etc/dphys-swapfile
 ```
 
-###find the passage below and change to 1025 and comment out the 100
+### find the passage below and change to 1025 and comment out the 100
  
-># set size to absolute value, leaving empty (default) then uses computed value
-># you most likely don't want this, unless you have an special disk situation
->CONF_SWAPSIZE=100
-># CONF_SWAPSIZE=1024
+>#set size to absolute value, leaving empty (default) then uses computed value
+>#you most likely don't want this, unless you have an special disk situation
+> CONF_SWAPSIZE=100
+>#CONF_SWAPSIZE=1024
 
 ### restart the swap process
 
