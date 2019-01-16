@@ -83,7 +83,7 @@ class MessageThread:
         if current_value != value:
             setattr(getattr(self.message_model, name), datapoint, value)
             self.arduino_queue.put(self.create_update_message(name, datapoint, value))
-            console_controller.create_message_event_info(datapoint, name, current_value, getattr(getattr(self.message_model, name)))
+            #console_controller.create_message_event_info(datapoint, name, current_value, getattr(getattr(self.message_model, name), name))
 
             
     def create_update_message(self, name, datapoint, value):

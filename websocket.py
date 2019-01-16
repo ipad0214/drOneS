@@ -29,6 +29,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
     # the client sent the message
     def on_message(self, message):
+        print(message)
         self.hardware_model.websocket_receiving_led = True
         self.hardware_queue.put(self.hardware_model)
         self.queue.put(message)
