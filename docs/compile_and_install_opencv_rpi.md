@@ -36,7 +36,7 @@ reboot again
 after the reboot install cmake
 
 ```bash
-	sudo apt-get install build-essentials cmake pkg-config -y
+	sudo apt-get install build-essential cmake pkg-config -y
 ```
 
 install Image i/o
